@@ -53,10 +53,10 @@ type suitInfo = {hex: int, color: string}
 
 let getSuitInfo = (s: suit): suitInfo => {
     switch s {
-    | Spades => {hex: 100, color: "black"}
-    | Hearts => {hex: 110, color: "red"}
-    | Diamonds => {hex: 120, color: "red"}
-    | Clubs => {hex: 130, color: "black"}
+    | Spades => {hex: 10 * 16, color: "black"}
+    | Hearts => {hex: 11 * 16, color: "red"}
+    | Diamonds => {hex: 12 * 16, color: "red"}
+    | Clubs => {hex: 13 * 16, color: "black"}
     }
 }
 
@@ -70,7 +70,9 @@ let getUnicodeChar = (card: card) => {
     let rankHex = getRankInfo(card.rank).hex
     let suitHex = getSuitInfo(card.suit).hex
     let baseCodePoint = 126976 // 1F000
-    Js.String.fromCharCode(baseCodePoint + suitHex + rankHex)
+    let codePoint = baseCodePoint + suitHex + rankHex
+    Js.log(codePoint)
+    Js.String.fromCodePoint(baseCodePoint + suitHex + rankHex)
 }
 
 let getColor = (card: card) => getSuitInfo(card.suit).color
